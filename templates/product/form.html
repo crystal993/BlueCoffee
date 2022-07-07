@@ -227,8 +227,8 @@
                 product_detail_give : product_detail
             },
             success: function (response) {
-                console.log(response['msg'])
-                window.location.reload() //새로고침
+                alert(response['msg'])
+                location.href = "/product/list" //새로고침
             }
         });
     }
