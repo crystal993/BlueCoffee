@@ -1,0 +1,66 @@
+nav ul{
+    /*  왼쪽에서부터 수평 정렬  */
+    display: flex;
+    flex-direction: row;
+    position: fixed; /* 상단에 fix */
+}
+
+nav li {
+    cursor: pointer; /*마우스 커서를 pointer모양으로 함*/
+    margin: 30px 10px 0px 0px;
+    list-style-type: none; /*목록 기호 제거*/
+    
+}
+
+nav li a {
+    padding: 8px;
+    text-decoration: none;
+    text-align: center;
+    color: #00638A;
+}
+
+nav li a:hover {
+    text-align: center;
+    text-decoration: none;
+    color: #c2c7c7;
+}
+
+nav li button {
+    border: 0px;
+    background: transparent;
+    text-align: center;
+    color: #00638A;
+}
+
+nav li button:hover {
+    border: 0px;
+    background: transparent;
+    text-align: center;
+    color: #c2c7c7;
+}
+
+.logo {
+    margin-top: -24px;
+    width: 100px;
+    height: 75px;
+}
+
+.main-nav ul {
+    position: static;
+}
+
+.main-nav li a {
+    color: #F9FFFF;
+}
+
+.main-nav li a:hover {
+    color: #00638A;
+}
+
+.main-nav li button {
+    color: #F9FFFF;
+}
+
+.main-nav li button:hover {
+    color: #00638A;
+}
