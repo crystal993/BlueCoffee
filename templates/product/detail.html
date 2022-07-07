@@ -168,8 +168,8 @@
                 <!--   판매자이고 자기가 등록한 제품일 때 -->
                 {% if user_info.user_type == '1' and user_info.user_id == product_info.writer %}
                 <div class="button-box">
-                    <button class="detail-button update-button" onClick="location.href='/product/form'">상품 수정</button>
-                    <button class="detail-button cancel-button" onClick="location.href='/product/form'">상품 삭제</button>
+                    <button class="detail-button update-button" onClick="location.href='/product/edit'">상품 수정</button>
+                    <button class="detail-button cancel-button" onClick="location.href='/product/del/{{product_info._id}}'">상품 삭제</button>
                 </div>
                 {% endif %}
             </div>

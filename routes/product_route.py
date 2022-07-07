@@ -84,3 +84,8 @@ def detail(id):
     else:
         login_status = 0
         return render_template('product/detail.html', login_status=login_status, product_info=product_info)
+
+@bp.route('/del/<id>')
+def delete(id):
+    db.products.delete_one({'_id':ObjectId(id)})
+    return product_list()
