@@ -22,15 +22,44 @@
     <!-- ajax   -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!-- cookie   -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
     <!-- google Web fonts   -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
 
 
     <!-- css links   -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+
+    <style>
+        * {
+            color: #00638A;
+            letter-spacing: .2em;
+        }
+        .seller-box {
+            float: right;
+            margin: 20px;
+            letter-spacing: 0px;
+        }
+        .seller-box button {
+            border: 1px solid #00638A;
+            border-radius: 10px;
+            width: 100px;
+            height: 40px;
+            letter-spacing: 0px;
+            font-size: 15px;
+            background-color: transparent;
+        }
+
+        .seller-box button:hover {
+            border: 1px solid #b0b4b6;
+            color: #878a8a;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <div class="main-container">
@@ -58,12 +87,23 @@
                 function logout() {
                     $.removeCookie('mytoken', {path: '/'});
                     alert('로그아웃!');
-                    window.location.href = "/main";
+                    window.location.href = "/product/list";
                 }
             </script>
             {% endif %}
         </ul>
     </nav>
+
+    <!--   회원 유형이 판매자일 경우    -->
+    {% if user_info.user_type == '1' %}
+    <div class="seller-box">
+        <button onClick="location.href='/product/form'">상품 등록</button>
+    </div>
+    {% endif %}
+
+    <div class="list">
+
+    </div>
 </div>
 </body>
 </html>
