@@ -31,19 +31,34 @@
 </head>
 <body>
 <div class="main-container">
-    <nav>
-        <ul>
-            <li><a href="/main"><img src="../../static/img/logo.png" class="logo"></a></li>
-            <li><a href="/product/list">PRODUCT</a></li>
-            <li><a href="/cafe/list">CAFE</a></li>
-            <li>
-                <button id="login">LOGIN</button>
-            </li>
-            <li>
-                <button id="signup">SIGN UP</button>
-            </li>
-        </ul>
-    </nav>
+    <nav class="main-nav">
+            <ul>
+                {% if login_status == 0 %}
+                    <li><a href="/main"><img src="../../static/img/logo.png" class="logo"></a></li>
+                    <li><a href="/product/list">PRODUCT</a></li>
+                    <li><a href="/cafe/list">COFFEE</a></li>
+                    <li>
+                        <button id="login">LOGIN</button>
+                    </li>
+                    <li>
+                        <button id="join">JOIN</button>
+                    </li>
+                 {% elif login_status == 1 %}
+                    <li><a href="/main"><img src="../../static/img/logo.png" class="logo"></a></li>
+                    <li><a href="/product/list">PRODUCT</a></li>
+                    <li><a href="/cafe/list">CAFE</a></li>
+                    <li><button class="logout" onclick="logout()">LOGOUT</button></li>
+                    <script>
+                        //logout
+                        function logout() {
+                            $.removeCookie('mytoken', {path: '/'});
+                            alert('로그아웃!');
+                            window.location.href = "/main";
+                        }
+                    </script>
+                {% endif %}
+            </ul>
+        </nav>
 </div>
 </body>
 </html>
