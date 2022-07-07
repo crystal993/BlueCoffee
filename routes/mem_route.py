@@ -46,6 +46,7 @@ def join():
     pw_receive = request.form['pw_give']
     name_receive = request.form['name_give']
     phone_receive = request.form['phone_give']
+    type_receive = request.form['type_give']
 
     # Encrypt
     pw_encode = pw_receive.encode('utf-8')
@@ -57,7 +58,8 @@ def join():
         'user_id' : id_receive,
         'user_pw' : pw_hash,
         'user_name' : name_receive,
-        'user_phone' : phone_receive
+        'user_phone' : phone_receive,
+        'user_type' : type_receive
     }
 
     db.users.insert_one(doc)

@@ -95,6 +95,17 @@
                 </div>
 
                 <div class="w-100">
+                    <div class="w-50">
+                        <input class="radio-input" type="radio" name="user-type" id="individual" value="0">
+                        <label for="individual">개인</label>
+                    </div>
+                    <div class="w-50">
+                        <input class="radio-input" type="radio" name="user-type" id="seller" value="1">
+                        <label for="seller">판매자</label>
+                    </div>
+                </div>
+
+                <div class="w-100">
                     <button type="button" class="send-button" onclick="join()">회원가입</button>
                     <!--                     <input type="submit" value="로그인" class="submit-btn">-->
                 </div>
@@ -230,7 +241,14 @@
         const user_pw = document.getElementById('join-pw').value;
         const user_name = document.getElementById('join-name').value;
         const user_phone = document.getElementById('join-tel').value;
-
+        let user_type = ''
+        let radios = document.getElementsByName('user-type').values()
+        for (var radio of radios)
+        {
+            if(radio.checked){
+                user_type = radio.value
+            }
+        }
         $.ajax({
             type: "POST",
             url: "/member/join",
@@ -238,7 +256,8 @@
                 id_give: user_id,
                 pw_give: user_pw,
                 name_give: user_name,
-                phone_give: user_phone
+                phone_give: user_phone,
+                type_give : user_type
             },
             success: function (response) {
                 alert(response['msg'])
