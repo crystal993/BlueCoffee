@@ -74,7 +74,6 @@ def detail(id):
     # 각 product의 고유한 아이디 값으로 페이지에 접근 했으므로 
     # 고유 아이디가 Object 타입이므로 ObjectId 메서드를 사용해서 형변환
     product_info = db.products.find_one({"_id": ObjectId(id)})
-    
     token_receive = request.cookies.get('mytoken')
     if token_receive is not None:
         payload = jwt.decode(token_receive, config.JWT_SECRET_KEY, algorithms=['HS256'])
@@ -85,6 +84,43 @@ def detail(id):
         login_status = 0
         return render_template('product/detail.html', login_status=login_status, product_info=product_info)
 
+@bp.route('/edit/<id>')
+def editForm(id):
+    product_info = db.products.find_one({"_id": ObjectId(id)})
+    token_receive = request.cookies.get('mytoken')
+    if token_receive is not None:
+        payload = jwt.decode(token_receive, config.JWT_SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"user_id": payload["id"]})
+        login_status = 1
+        return render_template('product/update.html', login_status=login_status, product_info=product_info,
+                               user_info=user_info)
+    else:
+        login_status = 0
+        return render_template('product/update.html', login_status=login_status, product_info=product_info)
+
+
+
+# 수정(U) : 상품 정보 수정
+@bp.route('/edit', methods=['POST'])
+def edit():
+    img_url_receive = request.form['img_url_give']
+    product_name_kor_receive = request.form['product_name_kor_give']
+    product_name_eng_receive = request.form['product_name_eng_give']
+    product_price_receive = request.form['product_price_give']
+    product_detail_receive = request.form['product_detail_give']
+    product_id_receive = request.form['product_id_give']
+
+    db.products.update_one({'_id': ObjectId(product_id_receive)},{'$set':{'img_url':img_url_receive}})
+    db.products.update_one({'_id': ObjectId(product_id_receive)},{'$set': {'product_name_kor': product_name_kor_receive}})
+    db.products.update_one({'_id': ObjectId(product_id_receive)},{'$set':{'product_name_eng': product_name_eng_receive}})
+    db.products.update_one({'_id': ObjectId(product_id_receive)},{'$set':{'product_price': product_price_receive}})
+    db.products.update_one({'_id': ObjectId(product_id_receive)},{'$set':{'product_price': product_price_receive}})
+    db.products.update_one({'_id': ObjectId(product_id_receive)},{'$set':{'product_detail': product_detail_receive}})
+    return jsonify({'msg': '상품 수정 성공!'})
+    
+
+
+# 삭제(D) : 상품 삭제
 @bp.route('/del/<id>')
 def delete(id):
     db.products.delete_one({'_id':ObjectId(id)})

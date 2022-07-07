@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cafe</title>
+
+    <!-- bootstrap   -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <!-- jQuery   -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- ajax   -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- cookie   -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <!-- google Web fonts   -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+
+
+    <!-- css links   -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+            letter-spacing: .2em;
+            color: #00638A;
+        }
+
+        .form-container {
+            max-width: 600px;
+            text-align: center;
+            color: white;
+
+            margin: 40px auto;
+        }
+
+        .form-container p {
+            text-align: left;
+            letter-spacing: 0px;
+            font-size: 20px;
+            margin: 10px 0px;
+            font-weight: bold;
+        }
+
+        .title {
+            letter-spacing: 0px;
+            margin: 50px;
+            font-weight: bold;
+        }
+
+        .form-input {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 10px;
+            font-size: 20px;
+            border: 1px solid #dcdada;
+            border-radius: 10px;
+            letter-spacing: 0px;
+            color: #00638A;
+        }
+
+        .form-input::placeholder {
+            color: #B5B5BC;
+        }
+
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #4fccfa;
+            border-radius: 10px;
+        }
+
+        .form-textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #dcdada;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: both;
+            color: #878a8a;
+            text-align: left;
+            letter-spacing: 0px;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #4fccfa;
+            border-radius: 10px;
+        }
+
+        .close-button {
+            float: right;
+            margin: -35px;
+        }
+
+        .close-button {
+            background-color: transparent;
+            border: none;
+            font-size: 18px;
+            color: #00638A;
+        }
+
+        .send-button {
+            border: none;
+            border-radius: 15px;
+            padding: 15px 20px;
+            background-color: #018ec5;
+            color: white;
+            margin-top: 20px;
+            width: 120px;
+            letter-spacing: 2px;
+        }
+
+        .radio-input {
+            margin: 5px;
+        }
+
+        .w-100 {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .w-50 {
+            width: 50%;
+            float: left;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <nav>
+        <ul>
+            {% if login_status == 0 %}
+            <li><a href="/main"><img src="../../static/img/logo.png" class="logo"></a></li>
+            <li><a href="/product/list">PRODUCT</a></li>
+            <li><a href="/coffee/list">COFFEE</a></li>
+            <li>
+                <button id="login">LOGIN</button>
+            </li>
+            <li>
+                <button id="join">JOIN</button>
+            </li>
+            {% elif login_status == 1 %}
+            <li><a href="/main"><img src="../../static/img/logo.png" class="logo"></a></li>
+            <li><a href="/product/list">PRODUCT</a></li>
+            <li><a href="/coffee/list">COFFEE</a></li>
+            <li>
+                <button class="logout" onclick="logout()">LOGOUT</button>
+            </li>
+            <script>
+                //logout
+                function logout() {
+                    $.removeCookie('mytoken', {path: '/'});
+                    alert('로그아웃!');
+                    window.location.href = "/coffee/list";
+                }
+            </script>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <form>
+            <div class="w-100">
+                <h3 class="title">상품 수정</h3>
+                <p>상품 이미지 URL</p>
+                <input id="product-image" class="form-input" type="text" value="{{product_info.img_url}}">
+            </div>
+
+            <div class="w-100">
+                <p>상품 이름</p>
+                <input id="product-name-kor" class="form-input" type="text" value="{{product_info.product_name_kor}}">
+            </div>
+
+            <div class="w-100">
+                <p>상품 이름 (ENG)</p>
+                <input id="product-name-eng" class="form-input" type="text" value="{{product_info.product_name_eng}}">
+            </div>
+
+            <div class="w-100">
+                <p>가격</p>
+                <input id="product-price" class="form-input" type="text" value="{{product_info.product_price}}">
+            </div>
+
+            <div class="w-100">
+                <p>상세 설명</p>
+                <textarea id="product-detail" class="form-textarea" value="">{{product_info.product_detail}}</textarea>
+            </div>
+
+            <input id="product-id" class="form-input" type="text" value="{{product_info._id}}" hidden>
+
+            <div class="w-100">
+                <button type="button" class="send-button" onclick="edit()">수정하기</button>
+                <!--                     <input type="submit" value="로그인" class="submit-btn">-->
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function edit() {
+        let img_url = document.getElementById('product-image').value;
+        let product_name_kor = document.getElementById('product-name-kor').value;
+        let product_name_eng = document.getElementById('product-name-eng').value;
+        let product_price = document.getElementById('product-price').value;
+        let product_detail = document.getElementById('product-detail').value;
+        let product_id = document.getElementById('product-id').value;
+
+        $.ajax({
+            type: "POST",
+            url: "/product/edit",
+            data: {
+                img_url_give: img_url,
+                product_name_kor_give: product_name_kor,
+                product_name_eng_give: product_name_eng,
+                product_price_give: product_price,
+                product_detail_give : product_detail,
+                product_id_give : product_id
+            },
+            success: function (response) {
+                alert(response['msg'])
+                location.href = "/product/list" //새로고침
+            }
+        });
+    }
+</script>
+</body>
+</html>
