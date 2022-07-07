@@ -1,0 +1,171 @@
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+    letter-spacing: .2em;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.bc-box {
+    margin: 0px auto;
+    position: relative;
+    overflow: hidden;
+
+    /* vw , vw 단위를 썼을 때
+    비디오가 여백없이 꽉 차서 나옴 */
+    width: 100vw;
+    height: 100vh;
+}
+
+#background-video {
+    z-index: -1;
+    width: 100vw;
+}
+
+.bc-text {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+
+    /* div 안의 요소들 열로 정렬 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bc-text h3 {
+    text-align: center;
+    margin-top: -24px;
+    font-size: 48px;
+    color: white;
+}
+
+.bc-text button {
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid #F9FFFF;
+    color: #F9FFFF;
+    padding: 10px;
+    font-size: 24px;
+    font-weight: lighter;
+    margin-top: 20px;
+    text-align: center;
+    cursor: pointer; /*마우스 커서를 pointer모양으로 함*/
+
+}
+
+.bc-text button:hover {
+    color: #ce8553;
+    border: 1px solid #CE8553FF;
+}
+
+/* fade in 애니메이션 */
+.fade-in-box {
+    margin: 20px auto;
+    display: inline-block;
+    padding: 10px;
+    animation: fadein 3s;
+    -moz-animation: fadein 3s; /* Firefox */
+    -webkit-animation: fadein 3s; /* Safari and Chrome */
+    -o-animation: fadein 3s; /* Opera */
+}
+
+.fade-in-box h2 {
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 100;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 800px) {
+    .bc-text h3 {
+        text-align: center;
+        margin-top: -18px;
+        font-size: 36px;
+        color: white;
+    }
+
+    .bc-text {
+        position: absolute;
+        top: 30%;
+        width: 100%;
+    }
+
+    .bc-text button {
+        border-radius: 5px;
+        background-color: transparent;
+        border: 1px solid #F9FFFF;
+        color: #F9FFFF;
+        padding: 10px;
+        font-size: 24px;
+        font-weight: lighter;
+        margin: 50px;
+        text-align: center;
+        cursor: pointer; /*마우스 커서를 pointer모양으로 함*/
+
+    }
+}
+
+@media (max-width: 600px) {
+    .bc-text h3 {
+        text-align: center;
+        margin-top: -12px;
+        font-size: 24px;
+        color: #00638A;
+    }
+
+    .bc-text {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+    }
+
+    .bc-text button {
+        border-radius: 5px;
+        background-color: transparent;
+        border: 1px solid #00638A;
+        color: #00638A;
+        padding: 10px;
+        font-size: 24px;
+        font-weight: lighter;
+        margin: 50px;
+        text-align: center;
+        cursor: pointer; /*마우스 커서를 pointer모양으로 함*/
+
+    }
+
+    .bc-text button:hover {
+        color: #878a8a;
+        border: 1px solid #878a8a;
+    }
+}
