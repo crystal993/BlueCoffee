@@ -1,3 +1,9 @@
+nav {
+    width: 100vw;
+    height: 85px;
+    border-bottom: 0.8px solid #d2dbe0;
+}
+
 nav ul{
     /*  왼쪽에서부터 수평 정렬  */
     display: flex;
@@ -43,6 +49,10 @@ nav li button:hover {
     margin-top: -24px;
     width: 100px;
     height: 75px;
+}
+
+.main-nav {
+    border-bottom: none;
 }
 
 .main-nav ul {
