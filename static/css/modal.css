@@ -1,0 +1,110 @@
+.black-bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    padding: 50px;
+
+    /* 애니메이션 */
+    visibility: hidden; /* 애니메이션 줄 때 display:none 대응   */
+    opacity: 0; /* 투명도 0은 안보임 1 다 보임 */
+    transition: all 1s; /* 모든 css 속성이 변할 때 1초에 걸쳐서 서서히 변하도록 하는 속성 */
+
+    /*  모든 글자  */
+    letter-spacing: 0px;
+    font-weight: 500;
+    color: #00638A;
+}
+
+.white-bg {
+    background: white;
+    border-radius: 5px;
+    padding: 50px 50px 30px 50px;
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+    z-index: 1000;
+}
+
+
+.w-100 {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.w-50 {
+    width: 50%;
+    float: left;
+    padding: 10px;
+}
+
+.show-modal {
+    visibility: visible;
+    opacity: 1;
+}
+
+.remove-modal {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.black-bg .title {
+    font-size: 35px;
+    color: #00638A;
+    font-weight: 900;
+    text-align: left;
+    letter-spacing: 0px;
+    margin-bottom: 30px;
+}
+
+.black-bg p {
+    text-align: left;
+    letter-spacing: 0px;
+    font-size: 20px;
+    margin: 10px 0px;
+}
+
+.form-input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    border: 1px solid #dcdada;
+    border-radius: 10px;
+    letter-spacing: 0px;
+    color: #00638A;
+}
+
+.form-input::placeholder {
+    color: #B5B5BC;
+}
+
+.form-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #4fccfa;
+    border-radius: 10px;
+}
+
+.close-button {
+    float: right;
+    margin: -35px;
+}
+
+.close-button {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    color: #00638A;
+}
+
+.send-button {
+    border: none;
+    border-radius: 15px;
+    padding: 15px 20px;
+    background-color: #018ec5;
+    color: white;
+    margin-top: 10px;
+    width: 120px;
+    letter-spacing: 2px;
+}
