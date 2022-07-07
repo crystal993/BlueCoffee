@@ -120,6 +120,22 @@
             border: none;
             cursor: pointer;
         }
+
+        .buy-button {
+            width: 80%;
+            margin-right: 10px;
+            border: 1px solid #018ec5;
+            background-color: transparent;
+            color: #018ec5;
+            cursor: pointer;
+        }
+
+        .buy-button:hover {
+            background-color: #018ec5;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body style="overflow-x: hidden; overflow-y: auto">
@@ -173,6 +189,12 @@
                     </button>
                     <button class="detail-button cancel-button"
                             onClick="location.href='/product/del/{{product_info._id}}'">상품 삭제
+                    </button>
+                </div>
+                {% elif user_info.user_type == '0' %}
+                <div class="button-box">
+                    <button class="detail-button buy-button"
+                            onClick="">구매하기
                     </button>
                 </div>
                 {% endif %}
