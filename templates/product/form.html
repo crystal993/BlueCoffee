@@ -29,7 +29,115 @@
     <!-- css links   -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+            letter-spacing: .2em;
+            color: #00638A;
+        }
+
+        .form-container {
+            max-width: 600px;
+            text-align: center;
+            color: white;
+
+            margin: 40px auto;
+        }
+
+        .form-container p {
+            text-align: left;
+            letter-spacing: 0px;
+            font-size: 20px;
+            margin: 10px 0px;
+            font-weight: bold;
+        }
+
+        .title {
+            letter-spacing: 0px;
+            margin: 50px;
+            font-weight: bold;
+        }
+
+        .form-input {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 10px;
+            font-size: 20px;
+            border: 1px solid #dcdada;
+            border-radius: 10px;
+            letter-spacing: 0px;
+            color: #00638A;
+        }
+
+        .form-input::placeholder {
+            color: #B5B5BC;
+        }
+
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #4fccfa;
+            border-radius: 10px;
+        }
+
+        .form-textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #dcdada;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: both;
+            color: #878a8a;
+            text-align: left;
+            letter-spacing: 0px;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #4fccfa;
+            border-radius: 10px;
+        }
+
+        .close-button {
+            float: right;
+            margin: -35px;
+        }
+
+        .close-button {
+            background-color: transparent;
+            border: none;
+            font-size: 18px;
+            color: #00638A;
+        }
+
+        .send-button {
+            border: none;
+            border-radius: 15px;
+            padding: 15px 20px;
+            background-color: #018ec5;
+            color: white;
+            margin-top: 20px;
+            width: 120px;
+            letter-spacing: 2px;
+        }
+
+        .radio-input {
+            margin: 5px;
+        }
+
+        .w-100 {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .w-50 {
+            width: 50%;
+            float: left;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 <div class="main-container">
@@ -63,6 +171,37 @@
             {% endif %}
         </ul>
     </nav>
+
+    <div class="form-container">
+        <form>
+            <div class="w-100">
+                <h3 class="title">상품 등록</h3>
+                <p>상품 이미지 URL</p>
+                <input id="product-image" class="form-input" type="text" placeholder="이미지 URL을 입력하세요.">
+            </div>
+
+            <div class="w-100">
+                <p>상품 이름</p>
+                <input id="product-name" class="form-input" type="text" placeholder="상품 이름을 입력하세요.">
+            </div>
+
+            <div class="w-100">
+                <p>가격</p>
+                <input id="product-price" class="form-input" type="text" placeholder="가격을 입력하세요.">
+            </div>
+
+            <div class="w-100">
+                <p>상세 설명</p>
+                <textarea class="form-textarea" placeholder="상품에 대한 설명을 입력해주세요.">
+                </textarea>
+            </div>
+
+            <div class="w-100">
+                <button type="button" class="send-button" onclick="join()">등록하기</button>
+                <!--                     <input type="submit" value="로그인" class="submit-btn">-->
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

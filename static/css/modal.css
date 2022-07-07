@@ -27,18 +27,6 @@
     z-index: 1000;
 }
 
-
-.w-100 {
-    width: 100%;
-    margin-bottom: 25px;
-}
-
-.w-50 {
-    width: 50%;
-    float: left;
-    padding: 10px;
-}
-
 .show-modal {
     visibility: visible;
     opacity: 1;
@@ -111,4 +99,15 @@
 
 .radio-input {
     margin: 5px;
+}
+
+.w-100 {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.w-50 {
+    width: 50%;
+    float: left;
+    padding: 10px;
 }

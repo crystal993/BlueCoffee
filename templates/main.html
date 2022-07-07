@@ -206,7 +206,8 @@
                     // 쿠키에 발급 받은 토큰을 저장한다.
                     $.cookie('mytoken', response['token'], {path: '/'});
                     alert(response['msg'])
-                    window.location.replace('/main')
+                    window.location.reload()
+                    // window.location.replace('/main')
                 } else {
                     alert(response['msg'])
                     window.location.reload()

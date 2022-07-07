@@ -1,3 +1,8 @@
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+    letter-spacing: .2em;
+}
+
 nav {
     width: 100vw;
     height: 85px;
@@ -8,7 +13,7 @@ nav ul{
     /*  왼쪽에서부터 수평 정렬  */
     display: flex;
     flex-direction: row;
-    position: fixed; /* 상단에 fix */
+    /*position: fixed; !* 상단에 fix *!*/
 }
 
 nav li {
