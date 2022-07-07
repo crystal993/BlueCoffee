@@ -11,20 +11,24 @@ bp = Blueprint('product', __name__, url_prefix='/product')
 
 # 조회(R) : 상품 리스트
 @bp.route('/list')
-def list():
+def product_list():
+    # 상품 리스트 전체 찾기
+    all_products = list(db.products.find({}))
+    print(all_products)
+    # 토큰을 받아와 로그인 여부 확인 및 유저 타입 확인
     token_receive = request.cookies.get('mytoken')
     if token_receive is not None:
         payload = jwt.decode(token_receive, config.JWT_SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"user_id": payload["id"]})
         login_status = 1
-        return render_template('product/list.html', login_status=login_status, user_info=user_info)
+        return render_template('product/list.html', login_status=login_status, user_info=user_info, all_products=all_products)
     else:
         login_status = 0
-    return render_template('product/list.html', login_status=login_status)
+    return render_template('product/list.html', login_status=login_status, all_products=all_products)
 
 # 조회(R) : 상품 등록 페이지로 이동
 @bp.route('/form')
-def form():
+def product_form():
     token_receive = request.cookies.get('mytoken')
     if token_receive is not None:
         payload = jwt.decode(token_receive, config.JWT_SECRET_KEY, algorithms=['HS256'])
