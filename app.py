@@ -29,6 +29,7 @@ def main():
     token_receive = request.cookies.get('mytoken')
 
     if token_receive is not None:
+        # decoding
         payload = jwt.decode(token_receive, config.JWT_SECRET_KEY, algorithms=['HS256'])
         #  user_info = db.fin_users.find_one({"id": payload["id"]})
         login_status = 1

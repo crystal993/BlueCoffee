@@ -120,7 +120,7 @@
                 {% if login_status == 0 %}
                     <li><a href="/main"><img src="../../static/img/logo.png" class="logo"></a></li>
                     <li><a href="/product/list">PRODUCT</a></li>
-                    <li><a href="/cafe/list">COFFEE</a></li>
+                    <li><a href="/coffee/list">COFFEE</a></li>
                     <li>
                         <button id="login">LOGIN</button>
                     </li>
@@ -130,7 +130,7 @@
                  {% elif login_status == 1 %}
                     <li><a href="/main"><img src="../../static/img/logo.png" class="logo"></a></li>
                     <li><a href="/product/list">PRODUCT</a></li>
-                    <li><a href="/cafe/list">CAFE</a></li>
+                    <li><a href="/coffee/list">COFFEE</a></li>
                     <li><button class="logout" onclick="logout()">LOGOUT</button></li>
                     <script>
                         //logout
@@ -203,6 +203,7 @@
             },
             success: function (response) {
                 if(response['result']==='success'){
+                    // 쿠키에 발급 받은 토큰을 저장한다.
                     $.cookie('mytoken', response['token'], {path: '/'});
                     alert(response['msg'])
                     window.location.replace('/main')

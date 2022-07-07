@@ -27,16 +27,16 @@
     <!-- css links   -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
 </head>
 <body>
 <div class="main-container">
-    <nav class="main-nav">
+    <nav>
             <ul>
                 {% if login_status == 0 %}
                     <li><a href="/main"><img src="../../static/img/logo.png" class="logo"></a></li>
                     <li><a href="/product/list">PRODUCT</a></li>
-                    <li><a href="/cafe/list">COFFEE</a></li>
+                    <li><a href="/coffee/list">COFFEE</a></li>
                     <li>
                         <button id="login">LOGIN</button>
                     </li>
@@ -46,7 +46,7 @@
                  {% elif login_status == 1 %}
                     <li><a href="/main"><img src="../../static/img/logo.png" class="logo"></a></li>
                     <li><a href="/product/list">PRODUCT</a></li>
-                    <li><a href="/cafe/list">CAFE</a></li>
+                    <li><a href="/coffee/list">COFFEE</a></li>
                     <li><button class="logout" onclick="logout()">LOGOUT</button></li>
                     <script>
                         //logout

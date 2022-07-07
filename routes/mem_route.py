@@ -31,6 +31,7 @@ def login():
             # 로그인 24시간 유지(), utc 기준이므로 9시간 더하면 우리나라 시간, 9시간+24시간 = 33시간
             'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=33)
         }
+        # 토큰 encoding
         token = jwt.encode(payload, config.JWT_SECRET_KEY, algorithm='HS256')
         msg = '로그인 성공!'
         result = 'success'
