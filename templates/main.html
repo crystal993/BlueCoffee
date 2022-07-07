@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="BLUE COFFEE"/>
+    <meta property="og:description" content="안녕하세요 BLUE COFFEE 입니다."/>
+    <meta property="og:image" content=""/>
+
+    <!-- bootstrap   -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <!-- jQuery   -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- ajax   -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- cookie   -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <!-- google Web fonts   -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+
+
+    <!-- css links   -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+
+    <!-- js links   -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/modal.js') }}">
+
+    <title>BLUE COFFEE</title>
+</head>
+<body>
+<div class="main-container">
+
+    <!--  로그인 모달 창  -->
+    <div class="black-bg" id="login-modal">
+        <div class="white-bg">
+            <button class="close-button" id="login-modal-close">X</button>
+            <form>
+                <div class="w-100">
+                    <h3 class="title">Login</h3>
+                    <p>ID</p>
+                    <input id="login-email" class="form-input" type="email">
+                </div>
+
+                <div class="w-100">
+                    <p>password</p>
+                    <input id="login-pw" class="form-input" type="password">
+                </div>
+
+                <div class="w-100">
+                    <button type="button" class="send-button" onclick="login()">로그인</button>
+                    <!--                     <input type="submit" value="로그인" class="submit-btn">-->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--  회원가입 모달 창  -->
+    <div class="black-bg" id="join-modal">
+        <div class="white-bg">
+            <button class="close-button" id="join-modal-close">X</button>
+            <form>
+                <div class="w-100">
+                    <h3 class="title">Join</h3>
+                    <p>ID</p>
+                    <input id="join-email" class="form-input" type="email">
+                </div>
+
+                <div class="w-100">
+                    <p>password</p>
+                    <input id="join-pw" class="form-input" type="password">
+                </div>
+
+                <div class="w-100">
+                    <p>name</p>
+                    <input id="join-name" class="form-input" type="text">
+                </div>
+
+                <div class="w-100">
+                    <p>phone</p>
+                    <input id="join-tel" class="form-input" type="tel">
+                </div>
+
+                <div class="w-100">
+                    <button type="button" class="send-button" onclick="join()">회원가입</button>
+                    <!--                     <input type="submit" value="로그인" class="submit-btn">-->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 헤더 -->
+    <div class="main-header">
+        <nav class="main-nav">
+            <ul>
+                {% if login_status == 0 %}
+                    <li><a href="/main"><img src="../../static/img/logo.png" class="logo"></a></li>
+                    <li><a href="/product/list">PRODUCT</a></li>
+                    <li><a href="/coffee/list">COFFEE</a></li>
+                    <li>
+                        <button id="login">LOGIN</button>
+                    </li>
+                    <li>
+                        <button id="join">JOIN</button>
+                    </li>
+                 {% elif login_status == 1 %}
+                    <li><a href="/main"><img src="../../static/img/logo.png" class="logo"></a></li>
+                    <li><a href="/product/list">PRODUCT</a></li>
+                    <li><a href="/cafe/list">CAFE</a></li>
+                    <li><button class="logout" onclick="logout()">LOGOUT</button></li>
+                    <script>
+                        //logout
+                        function logout() {
+                            $.removeCookie('mytoken', {path: '/'});
+                            alert('로그아웃!');
+                            window.location.href = "/main";
+                        }
+                    </script>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <div class="title float-left">
+            <h1>BLUE <br/> COFFEE</h1>
+        </div>
+        <div class="content float-left">
+            <p>함께하는 내일을 기원하며</p>
+            <h4>새로운 바람이 불어오는 계절</h4><br/>
+            <p>가을 바람은 지친 마음에 한줄기 위안을,<br/>
+                고립된 이들에게는 회복의 기운을 실어다 줍니다.<br/>
+                다가오는 한가위에 블루커피는 내일의 바람을 싣습니다.</p>
+        </div>
+        <div style="clear: both; float: none"></div>
+    </div>
+
+    <div class="main-contents">
+        <div>
+            <div class="slider-container">
+                <div class="slider-box">
+                    <img src="img/coffee1.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    // login
+    const login_btn = document.querySelector('#login');
+    const login_modal = document.querySelector('#login-modal');
+    const login_modal_close = document.querySelector('#login-modal-close');
+
+    // login 모달창 열기
+    login_btn.addEventListener('click', () => {
+        document.querySelector('#login-modal').classList.add("show-modal");
+    });
+
+    // login 모달창 버튼으로 닫기
+    login_modal_close.addEventListener('click', () => {
+        document.querySelector('#login-modal').classList.remove('show-modal');
+    })
+
+    // login 모달창 검은 부분 클릭해서 닫기
+    window.addEventListener('click', (e) => {
+        e.target === login_modal ? login_modal.classList.remove('show-modal') : false
+    })
+
+    //login ajax
+    function login() {
+        const user_id = document.getElementById('login-email').value;
+        const user_pw = document.getElementById('login-pw').value;
+        $.ajax({
+            type: "POST",
+            url: "/member/login",
+            data: {
+                id_give: user_id,
+                pw_give: user_pw,
+            },
+            success: function (response) {
+                if(response['result']==='success'){
+                    $.cookie('mytoken', response['token'], {path: '/'});
+                    alert(response['msg'])
+                    window.location.replace('/main')
+                } else {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+                // window.location.reload() //새로고침
+            }
+        });
+    }
+
+    // join
+    const join_btn = document.querySelector('#join');
+    const join_modal = document.querySelector('#join-modal');
+    const join_modal_close = document.querySelector('#join-modal-close');
+
+    // join 모달창 열기
+    join_btn.addEventListener('click', () => {
+        document.querySelector('#join-modal').classList.add("show-modal")
+    });
+
+    // join 모달창 버튼으로 닫기
+    join_modal_close.addEventListener('click', () => {
+        document.querySelector('#join-modal').classList.remove("show-modal")
+    });
+
+    // join 모달창 검은 부분 클릭해서 닫기
+    window.addEventListener('click', (e) => {
+        e.target === join_modal ? join_modal.classList.remove("show-modal") : false
+    })
+
+    // join ajax
+    function join() {
+        const user_id = document.getElementById('join-email').value;
+        const user_pw = document.getElementById('join-pw').value;
+        const user_name = document.getElementById('join-name').value;
+        const user_phone = document.getElementById('join-tel').value;
+
+        $.ajax({
+            type: "POST",
+            url: "/member/join",
+            data: {
+                id_give: user_id,
+                pw_give: user_pw,
+                name_give: user_name,
+                phone_give: user_phone
+            },
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload() //새로고침
+            }
+        });
+
+    }
+</script>
+</html>

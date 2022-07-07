@@ -1,0 +1,70 @@
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+    letter-spacing: .2em; 
+}
+
+.main-container {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: white;
+
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.main-header {
+    width: 100%;
+    height: 650px;
+    
+    background-size: cover;
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://cdn.pixabay.com/photo/2018/05/26/01/21/wall-3430446_1280.jpg');
+    background-position: center 30%;
+    
+    /*  중앙으로 열 정렬  */
+    /*
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    */
+}
+
+.float-left {
+    float: left;
+    text-align: left;
+}
+
+.main-header .title {
+     font-weight: 900;
+     margin: 200px 50px;
+}
+
+.main-header .content {
+    margin: 200px 0px;
+}
+
+.main-header .content>p {
+    margin: 5px 0px;
+}
+
+
+.main-contents {
+    width: 100%;
+    height: 800px;
+    background: white;
+}
+
+.main-footer {
+    width: 100%;
+    height: 100px;
+    background-color: #BDE6F1;
+    color: black;
+}
+
+.header {
+    float: left;
+    text-align: left;
+}
+
+
