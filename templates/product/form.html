@@ -182,7 +182,12 @@
 
             <div class="w-100">
                 <p>상품 이름</p>
-                <input id="product-name" class="form-input" type="text" placeholder="상품 이름을 입력하세요.">
+                <input id="product-name-kor" class="form-input" type="text" placeholder="상품 이름을 입력하세요.">
+            </div>
+
+            <div class="w-100">
+                <p>상품 이름 (ENG)</p>
+                <input id="product-name-eng" class="form-input" type="text" placeholder="상품 이름을 입력하세요.">
             </div>
 
             <div class="w-100">
@@ -192,16 +197,41 @@
 
             <div class="w-100">
                 <p>상세 설명</p>
-                <textarea class="form-textarea" placeholder="상품에 대한 설명을 입력해주세요.">
+                <textarea id="product-detail" class="form-textarea" placeholder="상품에 대한 설명을 입력해주세요.">
                 </textarea>
             </div>
 
             <div class="w-100">
-                <button type="button" class="send-button" onclick="join()">등록하기</button>
+                <button type="button" class="send-button" onclick="add()">등록하기</button>
                 <!--                     <input type="submit" value="로그인" class="submit-btn">-->
             </div>
         </form>
     </div>
 </div>
+<script>
+    function add() {
+        const img_url = document.getElementById('product-image').value;
+        const product_name_kor = document.getElementById('product-name-kor').value;
+        const product_name_eng = document.getElementById('product-name-eng').value;
+        const product_price = document.getElementById('product-price').value;
+        const product_detail = document.getElementById('product-detail').value;
+
+        $.ajax({
+            type: "POST",
+            url: "/product/add",
+            data: {
+                img_url_give: img_url,
+                product_name_kor_give: product_name_kor,
+                product_name_eng_give: product_name_eng,
+                product_price_give: product_price,
+                product_detail_give : product_detail
+            },
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload() //새로고침
+            }
+        });
+    }
+</script>
 </body>
 </html>
