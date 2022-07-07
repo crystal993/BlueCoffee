@@ -281,3 +281,10 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,flask
+
+# 환경설정 파일
+config.py
+
+# 이미지랑 비디오 파일
+static/img/
+static/media
