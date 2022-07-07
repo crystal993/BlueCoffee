@@ -97,6 +97,13 @@
     letter-spacing: 2px;
 }
 
+.send-button:hover {
+    border: 1px solid #018ec5;
+    background-color: transparent;
+    color: #018ec5;
+    cursor: pointer;
+}
+
 .radio-input {
     margin: 5px;
 }

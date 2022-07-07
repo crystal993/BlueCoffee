@@ -1,6 +1,7 @@
 import jwt
 from flask import request, render_template, redirect, Blueprint, jsonify
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 import config
 
 client = MongoClient(config.DB_CLIENT)
@@ -14,7 +15,6 @@ bp = Blueprint('product', __name__, url_prefix='/product')
 def product_list():
     # 상품 리스트 전체 찾기
     all_products = list(db.products.find({}))
-    print(all_products)
     # 토큰을 받아와 로그인 여부 확인 및 유저 타입 확인
     token_receive = request.cookies.get('mytoken')
     if token_receive is not None:
@@ -66,3 +66,21 @@ def add():
         return jsonify({'msg': '상품 등록 성공!'})
     else:
         return jsonify({'msg': '상품 등록 실패'})
+
+# 상세 페이지 이동 -> list.html -> detail.html
+@bp.route('/detail/<id>')  # <a href="/product/detail/{{product._id}}">
+def detail(id):
+    # 각 product의 고유한 아이디 값으로 product의 정보를 받아온다. 
+    # 각 product의 고유한 아이디 값으로 페이지에 접근 했으므로 
+    # 고유 아이디가 Object 타입이므로 ObjectId 메서드를 사용해서 형변환
+    product_info = db.products.find_one({"_id": ObjectId(id)})
+    
+    token_receive = request.cookies.get('mytoken')
+    if token_receive is not None:
+        payload = jwt.decode(token_receive, config.JWT_SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"user_id": payload["id"]})
+        login_status = 1
+        return render_template('product/detail.html', login_status=login_status, product_info=product_info, user_info=user_info)
+    else:
+        login_status = 0
+        return render_template('product/detail.html', login_status=login_status, product_info=product_info)
